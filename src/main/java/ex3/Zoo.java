@@ -1,5 +1,9 @@
 package ex3;
 
+import ex3.zone.Aquarium;
+import ex3.zone.SavaneAfricaine;
+import ex3.zone.ZoneCarnivore;
+
 public class Zoo {
 
 	private String nom;
