@@ -1,36 +1,45 @@
 package ex3;
 
-import ex3.zone.Aquarium;
-import ex3.zone.SavaneAfricaine;
-import ex3.zone.ZoneCarnivore;
+import ex3.animaux.Animal;
+import ex3.animaux.AnimalCategorie;
+import ex3.animaux.AnimalTypeRegime;
+import ex3.zone.Zone;
 
 public class Zoo {
-
+	
 	private String nom;
-	private SavaneAfricaine savaneAfricaine;
-	private ZoneCarnivore zoneCarnivore;
-	private FermeReptile fermeReptile;
-	private Aquarium aquarium;
+	private Zone savaneAfricaine;
+	private Zone zoneCarnivore;
+	private Zone fermeReptile;
+	private Zone aquarium;
 	
 	public Zoo(String nom){
 		this.nom = nom;
 	}
 	
-	public void addAnimal(String nomAnimal, String typeAnimal, String comportement){
-		if (typeAnimal.equals("MAMMIFERE") && comportement.equals("CARNIVORE")){
-			zoneCarnivore.addAnimal(typeAnimal, nomAnimal, comportement);
+	/**
+	 * @param nomAnimal	: nom de la nouvelle espece
+	 * @param categorie : categorie de l'espece
+	 * @param typeRegime : le regime alimentaire de l'animal
+	 * @param kgsNourritureJour : la quantitité de nourriture par jour de l'animal
+	 * @param nombre : le nombre d'animaux de cette espece dans le zoo
+	 */
+	public void addAnimal(String nomAnimal, AnimalCategorie categorie, AnimalTypeRegime typeRegime, double kgsNourritureJour, int nombre){
+		if (categorie.equals(AnimalCategorie.MAMMIFERE) && typeRegime.equals(AnimalTypeRegime.CARNIVORE)){
+			zoneCarnivore.addAnimal(new Animal(nomAnimal, categorie, typeRegime, kgsNourritureJour, nombre));
 		}
-		else if (typeAnimal.equals("MAMMIFERE") && comportement.equals("HERBIVORE")){
-			savaneAfricaine.addAnimal(typeAnimal, nomAnimal, comportement);
+		else if (categorie.equals(AnimalCategorie.MAMMIFERE) && typeRegime.equals(AnimalTypeRegime.HERBIVORE)){
+			savaneAfricaine.addAnimal(new Animal(nomAnimal, categorie, typeRegime, kgsNourritureJour, nombre));
 		}
-		else if (typeAnimal.equals("REPTILE")){
-			fermeReptile.addAnimal(typeAnimal, nomAnimal, comportement);
+		else if (categorie.equals(AnimalCategorie.REPTILE)){
+			fermeReptile.addAnimal(new Animal(nomAnimal, categorie, typeRegime, kgsNourritureJour, nombre));
 		}
-		else if (typeAnimal.equals("POISSON")){
-			aquarium.addAnimal(typeAnimal, nomAnimal, comportement);
+		else if (categorie.equals(AnimalCategorie.POISSON)){
+			aquarium.addAnimal(new Animal(nomAnimal, categorie, typeRegime, kgsNourritureJour, nombre));
 		}
 	}
 	
+	/** affiche toutes les especes presente dans le zoo */
 	public void afficherListeAnimaux(){
 		savaneAfricaine.afficherListeAnimaux();
 		zoneCarnivore.afficherListeAnimaux();
@@ -38,15 +47,15 @@ public class Zoo {
 		aquarium.afficherListeAnimaux();
 	}
 
-	/** Getter for nom
-	 * @return the nom
+	/** 
+	 * @return nom du zoo
 	 */
 	public String getNom() {
 		return nom;
 	}
 
-	/** Setter
-	 * @param nom the nom to set
+	/**
+	 * @param nom : nouveau nom du zoo
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
